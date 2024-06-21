@@ -5,8 +5,10 @@ import StudentsList from "./components/crud/StudentsList";
 function App() {
   return (
     <>
-      <ImportData />
-      <StudentsList />
+      <div className="container m-1">
+        <ImportData />
+        <StudentsList />
+      </div>
     </>
   );
 }

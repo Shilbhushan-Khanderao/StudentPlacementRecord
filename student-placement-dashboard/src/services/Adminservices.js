@@ -2,10 +2,10 @@ import axios from "axios";
 
 export const IMPORTCSVURI = "http://localhost:8080/admin/upload";
 export const GETALLSTUDENTS = "http://localhost:8080/students";
-export const GETSTUDENTBYID = "http://localhost:8080/getstudent/";
-export const ADDSTUDENT = "http://localhost:8080/addstudent";
-export const UPDATESTUDENT = "http://localhost:8080/updatestudent";
-export const REMOVESTUDENT = "http://localhost:8080/deletestudent?studentid=";
+export const GETSTUDENTBYID = "http://localhost:8080/getStudent/";
+export const ADDSTUDENT = "http://localhost:8080/addStudent";
+export const UPDATESTUDENT = "http://localhost:8080/updateStudent";
+export const REMOVESTUDENT = "http://localhost:8080/deleteStudent?studentid=";
 
 //import data via csv to database
 export function importData(formData) {
