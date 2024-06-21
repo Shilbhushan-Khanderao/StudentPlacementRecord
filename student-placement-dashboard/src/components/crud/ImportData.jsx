@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { importData } from "../services/Adminservices";
+import { importData } from "../../services/Adminservices";
 
 function ImportData() {
   const [file, setFile] = useState();
@@ -24,13 +24,13 @@ function ImportData() {
     <div>
       <form>
         <input
-          className="p-2"
+          className="file-input file-input-bordered w-full max-w-xs"
           type="file"
           accept=".csv"
           onChange={handleChange}
         />
         <button
-          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+          className="btn btn-outline ml-1"
           type="submit"
           onClick={() => importCsvData(file)}
         >

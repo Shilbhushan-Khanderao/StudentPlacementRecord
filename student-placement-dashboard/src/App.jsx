@@ -1,6 +1,6 @@
 import "./App.css";
-import ImportData from "./components/ImportData";
-import StudentsList from "./components/StudentsList";
+import ImportData from "./components/crud/ImportData";
+import StudentsList from "./components/crud/StudentsList";
 
 function App() {
   return (
