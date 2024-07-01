@@ -1,11 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { getAllStudents } from "../../services/Adminservices";
+import {
+  addPlacedStudent,
+  getAllStudents,
+  getStudentyById,
+  removeStudent,
+} from "../../services/Adminservices";
 import { MdOutlineUpdate, MdDeleteForever, MdCheck } from "react-icons/md";
 import AddStudent from "./AddStudent";
+import UpdateStudent from "./UpdateStudent";
 
 function StudentsList() {
   const [students, setStudents] = useState([]);
-  const [show, setShow] = useState(false);
+  const [showAdd, setShowAdd] = useState(false);
+  const [showUpdate, setShowUpdate] = useState(false);
+  const [sid, setSid] = useState("");
+  const [student, setStudent] = useState({});
 
   useEffect(() => {
     getAllStudents()
@@ -15,17 +24,46 @@ function StudentsList() {
       .catch((error) => console.log(error));
   }, [students]);
 
-  const handleShow = () => {
-    setShow(true);
+  const handleShowAdd = () => {
+    setShowAdd(true);
   };
 
-  const handleUpdate = () => {};
+  const handleShowUpdate = (studentId) => {
+    setShowUpdate(true);
+    setSid(studentId);
+  };
+
+  const handleDelete = (studentId) => {
+    removeStudent(studentId)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const handlePlaced = (studentId) => {
+    getStudentyById(studentId)
+      .then((response) => setStudent(response.data))
+      .catch((error) => console.log(error));
+
+    addPlacedStudent(student)
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
+  };
   return (
     <>
+      <h1 className="text-center text-3xl">All Students List</h1>
       {students.length ? (
         <div className="w-full">
-          {show && <AddStudent show={show} setShow={setShow} />}
-          <button className="btn btn-outline w-28 mt-2" onClick={handleShow}>
+          {showUpdate && (
+            <UpdateStudent
+              show={showUpdate}
+              setShow={setShowUpdate}
+              sid={sid}
+            />
+          )}
+          {showAdd && <AddStudent show={showAdd} setShow={setShowAdd} />}
+          <button className="btn btn-outline w-28 mt-2" onClick={handleShowAdd}>
             Add
           </button>
           <table className="table">
@@ -60,7 +98,7 @@ function StudentsList() {
                     <button
                       className="btn btn-outline mx-0.5"
                       type="button"
-                      onClick={() => handleUpdate(student.id)}
+                      onClick={() => handleShowUpdate(student.id)}
                     >
                       <MdOutlineUpdate />
                     </button>

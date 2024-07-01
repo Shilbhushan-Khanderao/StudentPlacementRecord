@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Modal, Select } from "react-daisyui";
+import { Button, Modal } from "react-daisyui";
 import { addStudent } from "../../services/Adminservices";
 
 function AddStudent({ show, setShow }) {
@@ -18,10 +18,6 @@ function AddStudent({ show, setShow }) {
 
   const handleChange = (e) => {
     setStudent({ ...student, [e.target.name]: e.target.value });
-  };
-
-  const handleCenter = (e) => {
-    console.log(e.target.name + " : " + e.target.value);
   };
 
   const handleAddStudent = () => {
@@ -120,7 +116,9 @@ function AddStudent({ show, setShow }) {
                 value={student.centre}
                 onChange={handleChange}
               >
-                <option selected>Select</option>
+                <option disabled value="">
+                  Select
+                </option>
                 <option value={"KH"}>Kharghar</option>
                 <option value={"JH"}>Juhu</option>
               </select>
