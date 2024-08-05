@@ -9,7 +9,7 @@ export const UPDATESTUDENT = "http://localhost:8080/updateStudent";
 export const REMOVESTUDENT = "http://localhost:8080/deleteStudent?studentid=";
 
 //Placed Students API Endpoints
-export const GETALLPLACEDSTUDENTS = "http://localhost:8080/placedstudents";
+export const GETALLPLACEDSTUDENTS = "http://localhost:8080/placedStudents";
 export const GETPLACEDSTUDENTBYID = "http://localhost:8080/getPlacedStudent/";
 export const ADDPLACEDSTUDENT = "http://localhost:8080/addPlacedStudent";
 export const UPDATEPLACEDSTUDENT = "http://localhost:8080/updatePlacedStudent";

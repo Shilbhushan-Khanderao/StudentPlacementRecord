@@ -1,28 +1,25 @@
 import React, { useEffect, useState } from "react";
-import {
-  addPlacedStudent,
-  getAllStudents,
-  getStudentyById,
-  removeStudent,
-} from "../../services/Adminservices";
+import { getAllStudents, removeStudent } from "../../services/Adminservices";
 import { MdOutlineUpdate, MdDeleteForever, MdCheck } from "react-icons/md";
 import AddStudent from "./AddStudent";
 import UpdateStudent from "./UpdateStudent";
+import AddPlacedStudent from "../placed/AddPlacedStudent";
 
 function StudentsList() {
   const [students, setStudents] = useState([]);
   const [showAdd, setShowAdd] = useState(false);
   const [showUpdate, setShowUpdate] = useState(false);
+  const [showPlaced, setShowPlaced] = useState(false);
   const [sid, setSid] = useState("");
-  const [student, setStudent] = useState({});
 
   useEffect(() => {
     getAllStudents()
       .then((response) => {
         setStudents(response.data);
+        // console.log(response);
       })
       .catch((error) => console.log(error));
-  }, [students]);
+  }, []);
 
   const handleShowAdd = () => {
     setShowAdd(true);
@@ -42,13 +39,8 @@ function StudentsList() {
   };
 
   const handlePlaced = (studentId) => {
-    getStudentyById(studentId)
-      .then((response) => setStudent(response.data))
-      .catch((error) => console.log(error));
-
-    addPlacedStudent(student)
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+    setShowPlaced(true);
+    setSid(studentId);
   };
   return (
     <>
@@ -63,6 +55,13 @@ function StudentsList() {
             />
           )}
           {showAdd && <AddStudent show={showAdd} setShow={setShowAdd} />}
+          {showPlaced && (
+            <AddPlacedStudent
+              show={showPlaced}
+              setShow={setShowPlaced}
+              sid={sid}
+            />
+          )}
           <button className="btn btn-outline w-28 mt-2" onClick={handleShowAdd}>
             Add
           </button>

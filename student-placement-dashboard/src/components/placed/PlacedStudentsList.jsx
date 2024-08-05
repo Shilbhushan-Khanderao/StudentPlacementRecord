@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { MdOutlineUpdate, MdDeleteForever, MdCheck } from "react-icons/md";
+import { MdOutlineUpdate, MdDeleteForever } from "react-icons/md";
 import {
   getAllPlacedStudents,
   removePlacedStudent,
 } from "../../services/Adminservices";
-import AddPlacedStudent from "./AddPlacedStudent";
 import UpdatePlacedStudent from "./UpdatePlacedStudent";
 
 function PlacedStudentsList() {
   const [students, setStudents] = useState([]);
-  const [showAdd, setShowAdd] = useState(false);
   const [showUpdate, setShowUpdate] = useState(false);
   const [sid, setSid] = useState("");
 
@@ -17,13 +15,10 @@ function PlacedStudentsList() {
     getAllPlacedStudents()
       .then((response) => {
         setStudents(response.data);
+        // console.log(response);
       })
       .catch((error) => console.log(error));
-  }, [students]);
-
-  const handleShowAdd = () => {
-    setShowAdd(true);
-  };
+  }, []);
 
   const handleShowUpdate = (studentId) => {
     setShowUpdate(true);
@@ -49,10 +44,6 @@ function PlacedStudentsList() {
               sid={sid}
             />
           )}
-          {showAdd && <AddPlacedStudent show={showAdd} setShow={setShowAdd} />}
-          <button className="btn btn-outline w-28 mt-2" onClick={handleShowAdd}>
-            Add
-          </button>
           <table className="table">
             <thead>
               <tr>
@@ -77,15 +68,8 @@ function PlacedStudentsList() {
                   <td>{student.mentor}</td>
                   <td>{student.centre}</td>
                   <td>{student.company}</td>
-                  <td>{student.posterCreated}</td>
+                  <td>{student.posterCreated === true ? "Yes" : "No"}</td>
                   <td>
-                    <button
-                      className="btn btn-outline mx-0.5"
-                      type="button"
-                      onClick={() => handlePlaced(student.id)}
-                    >
-                      <MdCheck />
-                    </button>
                     <button
                       className="btn btn-outline mx-0.5"
                       type="button"
