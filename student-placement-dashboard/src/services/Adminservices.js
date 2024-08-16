@@ -66,3 +66,6 @@ export function updatePlacedStudent(student) {
 export function removePlacedStudent(studentId) {
   return axios.delete(REMOVEPLACEDSTUDENT + studentId);
 }
+//CRUD Methods end here....
+
+

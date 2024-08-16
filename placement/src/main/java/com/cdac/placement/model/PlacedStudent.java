@@ -3,9 +3,7 @@ package com.cdac.placement.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Getter
-@Setter
-@ToString
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -29,14 +27,21 @@ public class PlacedStudent {
     @Column(name = "centre")
     private String centre;
 
-    @Column(name = "faculty")
-    private String faculty;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "batch_id")
+    private Batch batch;
 
-    @Column(name = "mentor")
-    private String mentor;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "mentor_id")
+    private Mentor mentor;
 
-    @Column(name = "company")
-    private String company;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "faculty_id")
+    private Faculty faculty;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "company_id")
+    private Company company;
 
     @Column(name = "posterCreated")
     private boolean posterCreated;

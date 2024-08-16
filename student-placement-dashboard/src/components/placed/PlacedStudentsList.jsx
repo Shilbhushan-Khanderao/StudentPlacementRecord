@@ -5,6 +5,8 @@ import {
   removePlacedStudent,
 } from "../../services/Adminservices";
 import UpdatePlacedStudent from "./UpdatePlacedStudent";
+import { Link, NavLink } from "react-router-dom";
+import { Button } from "react-daisyui";
 
 function PlacedStudentsList() {
   const [students, setStudents] = useState([]);
@@ -35,6 +37,9 @@ function PlacedStudentsList() {
   return (
     <>
       <h1 className="text-center text-3xl">Placed Students List</h1>
+      <Link to="/students" className="btn btn-primary mx-2">
+        Students
+      </Link>
       {students.length ? (
         <div className="w-full">
           {showUpdate && (

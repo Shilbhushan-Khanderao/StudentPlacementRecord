@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { getAllStudents, removeStudent } from "../../services/Adminservices";
 import { MdOutlineUpdate, MdDeleteForever, MdCheck } from "react-icons/md";
 import AddStudent from "./AddStudent";
@@ -62,9 +63,18 @@ function StudentsList() {
               sid={sid}
             />
           )}
-          <button className="btn btn-outline w-28 mt-2" onClick={handleShowAdd}>
-            Add
-          </button>
+
+          <div>
+            <button
+              className="btn btn-outline w-28 mt-2"
+              onClick={handleShowAdd}
+            >
+              Add
+            </button>
+            <Link to="/placed-students" className="btn btn-primary mx-1">
+              Placed Students
+            </Link>
+          </div>
           <table className="table">
             <thead>
               <tr>

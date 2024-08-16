@@ -25,18 +25,22 @@ public class Student {
     @Column(name = "centre")
     private String centre;
 
-    @Column(name = "faculty")
-    private  String faculty;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "batch_id")
+    private Batch batch;
 
-    @Column(name = "mentor")
-    private  String mentor;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "mentor_id")
+    private Mentor mentor;
 
-    public Student(long prn, String name, int teamNumber, String mentor, String faculty, String centre) {
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "faculty_id")
+    private Faculty faculty;
+
+    public Student(long prn, String name, int teamNumber, String centre) {
         this.prn = prn;
         this.name = name;
         this.teamNumber = teamNumber;
-        this.mentor = mentor;
-        this.faculty = faculty;
         this.centre = centre;
     }
 }
