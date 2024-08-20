@@ -1,4 +1,4 @@
-package com.cdac.placement.Response;
+package com.cdac.placement.response;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

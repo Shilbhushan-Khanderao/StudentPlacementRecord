@@ -1,6 +1,6 @@
 package com.cdac.placement.controller;
 
-import com.cdac.placement.Response.Response;
+import com.cdac.placement.response.Response;
 import com.cdac.placement.model.Student;
 import com.cdac.placement.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,9 +1,12 @@
 package com.cdac.placement.serviceImpl;
 
+import com.cdac.placement.helper.CsvContent;
 import com.cdac.placement.helper.CsvHelper;
+import com.cdac.placement.model.Batch;
 import com.cdac.placement.model.Faculty;
 import com.cdac.placement.model.Mentor;
 import com.cdac.placement.model.Student;
+import com.cdac.placement.repository.BatchRepository;
 import com.cdac.placement.repository.FacultyRepository;
 import com.cdac.placement.repository.MentorRepository;
 import com.cdac.placement.repository.StudentRepository;
@@ -18,7 +21,8 @@ import java.util.Set;
 
 @Service
 public class CsvServiceImpl implements CsvService {
-
+    @Autowired
+    BatchRepository batchRepository;
     @Autowired
     StudentRepository studentRepository;
     @Autowired
@@ -27,13 +31,28 @@ public class CsvServiceImpl implements CsvService {
     FacultyRepository facultyRepository;
 
     @Override
-    public void save(MultipartFile file) {
+    public void save(MultipartFile file, String name, String batchName) {
         try {
-            Object[] csvObjects = CsvHelper.csvToObjects(file.getInputStream());
-            List<Student> students = (List<Student>) csvObjects[0];
-            Set<Mentor> mentors = (Set<Mentor>) csvObjects[1];
-            Set<Faculty> faculties = (Set<Faculty>) csvObjects[2];
-            studentRepository.saveAll(students); // conversion to list needed as returning an array
+            Batch batch;
+            if(name != null && batchName != null) {
+                if(batchRepository.existsByName(name))
+                    batch = batchRepository.findByName(name);
+                else
+                    batch = batchRepository.save(new Batch(name, batchName));
+            } else {
+                batch = null;
+            }
+
+            CsvContent csvContent = CsvHelper.csvToContent(file.getInputStream(), mentorRepository, facultyRepository);
+
+            List<Student> students = csvContent.getStudents();
+            Set<Mentor> mentors = csvContent.getMentors();
+            Set<Faculty> faculties = csvContent.getFaculties();
+
+            CsvHelper.associateBatch(students, batch);
+            studentRepository.saveAll(students);
+
+
             mentorRepository.saveAll(mentors);
             facultyRepository.saveAll(faculties);
 

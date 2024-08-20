@@ -17,12 +17,12 @@ public class CsvController {
     @Autowired
     CsvService fileService;
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file){
+    public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("name") String name, @RequestParam("batchName") String batchName){
         String message = "";
 
         if (CsvHelper.hasCsvFormat(file)){
             try{
-                fileService.save(file);
+                fileService.save(file, name, batchName);
                 message = "Uploaded the file successfully: " + file.getOriginalFilename();
                 return ResponseEntity.status(HttpStatus.OK).body(message);
             } catch (Exception e){
