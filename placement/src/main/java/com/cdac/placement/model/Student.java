@@ -1,7 +1,8 @@
 package com.cdac.placement.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
@@ -11,7 +12,7 @@ public class Student {
     @Id
     @GeneratedValue
     @Column(name = "id")
-    private  int id;
+    private int id;
 
     @Column(name = "prn", unique = true)
     private long prn;

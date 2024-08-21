@@ -1,5 +1,6 @@
 package com.cdac.placement.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,7 @@ public class Batch {
     private String BatchName;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "batch", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Student> studentList;
 
     public Batch(String name, String batchName) {

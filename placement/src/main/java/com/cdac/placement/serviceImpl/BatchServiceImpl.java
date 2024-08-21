@@ -29,8 +29,6 @@ public class BatchServiceImpl implements BatchService {
         }
     }
 
-
-
     @Override
     public boolean deleteAllBatches() {
         try {

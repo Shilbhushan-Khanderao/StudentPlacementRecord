@@ -1,5 +1,6 @@
 package com.cdac.placement.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class Company {
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "company", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<PlacedStudent> placedStudentList;
     public Company(String name) {
         this.name = name;

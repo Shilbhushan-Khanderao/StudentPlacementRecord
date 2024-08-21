@@ -32,7 +32,7 @@ public class StudentController {
         }
     }
 
-    //http://localhost:8080/getstudent/1
+    //http://localhost:8080/getStudent/1
     @GetMapping(value = "/getStudent/{studentid}")
     public ResponseEntity<?> getStudent(@PathVariable("studentid") int studentid){
         try {
