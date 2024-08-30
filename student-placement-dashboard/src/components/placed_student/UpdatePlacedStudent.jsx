@@ -1,35 +1,37 @@
-import React, { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import React from "react";
 import {
-  addPlacedStudent,
-  getStudentyById,
+  updatePlacedStudent,
+  getPlacedStudentyById,
 } from "../../services/Adminservices";
 import { Modal, Button } from "react-daisyui";
 
-function AddPlacedStudent({ show, setShow, sid }) {
+function UpdatePlacedStudent({ show, setShow, sid }) {
   const [company, setCompany] = useState("");
   const [posterCreated, setPosterCreated] = useState(false);
   const [student, setStudent] = useState({});
 
   useEffect(() => {
-    getStudentyById(sid)
+    getPlacedStudentyById(sid)
       .then((response) => {
         setStudent(response.data);
+        // console.log(response);
       })
       .catch((error) => console.log(error));
   }, [sid]);
 
-  const handleAddPlacedStudent = () => {
+  const handleUpdatePlacedStudent = () => {
     const stud = {
       ...student,
-      company: company,
+      company: {name : company},
       posterCreated: posterCreated,
     };
-    addPlacedStudent(stud)
+    updatePlacedStudent(stud)
       .then((response) => {
         console.log("Student sent to DB : " + stud);
         console.log(response);
       })
-      .catch((error) => console.log("Error from addPlacedStudent" + error));
+      .catch((error) => console.log("Error from updatePlacedStudent" + error));
   };
 
   const closeModal = () => {
@@ -37,12 +39,11 @@ function AddPlacedStudent({ show, setShow, sid }) {
   };
 
   const handleChecked = () => setPosterCreated(!posterCreated);
-
   return (
     <>
       <div className="font-sans">
         <Modal open={show}>
-          <div className="font-bold text-xl">Placed Student</div>
+          <div className="font-bold text-xl">Update Placed Student</div>
           <form>
             <Button
               size="md"
@@ -81,9 +82,9 @@ function AddPlacedStudent({ show, setShow, sid }) {
             <Button
               type="submit"
               className="btn btn-outline mt-2 w-28"
-              onClick={handleAddPlacedStudent}
+              onClick={handleUpdatePlacedStudent}
             >
-              Placed
+              Update
             </Button>
           </form>
         </Modal>
@@ -92,4 +93,4 @@ function AddPlacedStudent({ show, setShow, sid }) {
   );
 }
 
-export default AddPlacedStudent;
+export default UpdatePlacedStudent;

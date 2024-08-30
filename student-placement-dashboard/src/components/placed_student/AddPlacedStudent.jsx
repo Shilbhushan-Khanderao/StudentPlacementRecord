@@ -1,60 +1,59 @@
-import { useState, useEffect } from "react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
-  updatePlacedStudent,
-  getPlacedStudentyById,
+  addPlacedStudent,
+  getStudentyById,
 } from "../../services/Adminservices";
-import { Modal, Button } from "react-daisyui";
+import { Button } from "react-daisyui";
+import { useLocation, useNavigate } from "react-router-dom";
 
-function UpdatePlacedStudent({ show, setShow, sid }) {
+function AddPlacedStudent() {
   const [company, setCompany] = useState("");
   const [posterCreated, setPosterCreated] = useState(false);
   const [student, setStudent] = useState({});
+  const navigate = useNavigate();
+  const location = useLocation();
+  const studentId = location.state?.id;
 
   useEffect(() => {
-    getPlacedStudentyById(sid)
+    getStudentyById(studentId)
       .then((response) => {
         setStudent(response.data);
-        console.log(response);
       })
       .catch((error) => console.log(error));
-  }, [sid]);
+  }, [studentId]);
 
-  const handleUpdatePlacedStudent = () => {
+  const handleAddPlacedStudent = (e) => {
+    e.preventDefault();
     const stud = {
       ...student,
       company: company,
       posterCreated: posterCreated,
     };
-    updatePlacedStudent(stud)
+    console.log(stud);
+    addPlacedStudent(stud)
       .then((response) => {
-        console.log("Student sent to DB : " + stud);
-        console.log(response);
+        if (response.data.status === "success") {
+          navigate("/placed-students");
+        }
       })
-      .catch((error) => console.log("Error from updatePlacedStudent" + error));
-  };
-
-  const closeModal = () => {
-    setShow(false);
+      .catch((error) => console.log("Error from addPlacedStudent" + error));
   };
 
   const handleChecked = () => setPosterCreated(!posterCreated);
+
   return (
     <>
-      <div className="font-sans">
-        <Modal open={show}>
-          <div className="font-bold text-xl">Update Placed Student</div>
-          <form>
-            <Button
-              size="md"
-              color="ghost"
-              shape="circle"
-              className="absolute right-2 top-2"
-              onClick={closeModal}
-            >
-              X
-            </Button>
-            <label className="form-control w-full ">
+      <div className="font-sans w-full">
+        <div className="items-center">
+          <div className="stats stats-vertical">
+            <div className="stat">
+              <div className="stat-value">Name - {student.name}</div>
+              <div className="stat-value">PRN - {student.prn}</div>
+              <div className="stat-value">Center - {student.centre}</div>
+            </div>
+          </div>
+          <form className="form-control flex w-1/4 ms-5">
+            <label className="w-30">
               <div className="label">
                 <span className="label-text">Organization</span>
               </div>
@@ -82,15 +81,15 @@ function UpdatePlacedStudent({ show, setShow, sid }) {
             <Button
               type="submit"
               className="btn btn-outline mt-2 w-28"
-              onClick={handleUpdatePlacedStudent}
+              onClick={handleAddPlacedStudent}
             >
-              Update
+              Placed
             </Button>
           </form>
-        </Modal>
+        </div>
       </div>
     </>
   );
 }
 
-export default UpdatePlacedStudent;
+export default AddPlacedStudent;

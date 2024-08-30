@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "react-daisyui";
-import { getStudentyById, updateStudent } from "../../services/Adminservices";
-import { useLocation, useNavigate } from "react-router-dom";
+import { addStudent } from "../../services/Adminservices";
 
-function UpdateStudent(props) {
+function AddStudent() {
   const [student, setStudent] = useState({
     batch: { name: "", batchName: "" },
     prn: "",
@@ -15,14 +15,6 @@ function UpdateStudent(props) {
   });
 
   const navigate = useNavigate();
-  const location = useLocation();
-  const studentId = location.state?.id;
-
-  useEffect(() => {
-    getStudentyById(studentId)
-      .then((response) => setStudent(response.data))
-      .catch((error) => console.log(error + ": " + studentId));
-  }, [studentId]);
 
   const handleChange = (e) => {
     setStudent({ ...student, [e.target.name]: e.target.value });
@@ -56,9 +48,9 @@ function UpdateStudent(props) {
     }));
   };
 
-  const handleUpdateStudent = (e) => {
+  const handleAddStudent = (e) => {
     e.preventDefault();
-    updateStudent(student)
+    addStudent(student)
       .then((response) => {
         if (response.data.status === "success") {
           navigate("/students");
@@ -70,7 +62,7 @@ function UpdateStudent(props) {
   return (
     <>
       <div className="font-sans w-full">
-        <div className="font-bold text-xl">Update Student</div>
+        <div className="font-bold text-xl text-center">Add New Student</div>
         <div className="items-center">
           <form className="form-control flex items-center">
             <label className="w-30">
@@ -110,7 +102,7 @@ function UpdateStudent(props) {
                 placeholder="Enter PRN"
                 name="prn"
                 value={student.prn}
-                className="input input-bordered w-full "
+                className="input input-bordered w-30 "
                 onChange={handleChange}
               />
             </label>
@@ -123,7 +115,7 @@ function UpdateStudent(props) {
                 placeholder="Enter Name"
                 name="name"
                 value={student.name}
-                className="input input-bordered w-full"
+                className="input input-bordered w-30"
                 onChange={handleChange}
               />
             </label>
@@ -136,11 +128,11 @@ function UpdateStudent(props) {
                 placeholder="Enter Team No."
                 name="teamNumber"
                 value={student.teamNumber}
-                className="input input-bordered w-full"
+                className="input input-bordered w-30"
                 onChange={handleChange}
               />
             </label>
-            <label className="w-30">
+            <label className="w-30 ">
               <div className="label">
                 <span className="label-text">Faculty</span>
               </div>
@@ -149,8 +141,10 @@ function UpdateStudent(props) {
                 placeholder="Enter Faculty"
                 name="faculty"
                 value={student.faculty.name}
-                className="input input-bordered w-full"
-                onChange={(e) => handleFacultyChange(e.target.value)}
+                className="input input-bordered w-30"
+                onChange={(e) => {
+                  handleFacultyChange(e.target.value);
+                }}
               />
             </label>
             <label className="w-30">
@@ -162,11 +156,13 @@ function UpdateStudent(props) {
                 placeholder="Enter Mentor"
                 name="mentor"
                 value={student.mentor.name}
-                className="input input-bordered w-full"
-                onChange={(e) => handleMentorChange(e.target.value)}
+                className="input input-bordered w-30"
+                onChange={(e) => {
+                  handleMentorChange(e.target.value);
+                }}
               />
             </label>
-            <label className="w-30">
+            <label className="">
               <div className="label">
                 <span className="label-text">Centre</span>
               </div>
@@ -185,10 +181,10 @@ function UpdateStudent(props) {
             </label>
             <Button
               type="submit"
-              className="btn btn-outline mt-2 w-28"
-              onClick={handleUpdateStudent}
+              className="btn btn-outline mt-2 w-20"
+              onClick={handleAddStudent}
             >
-              Update
+              Add
             </Button>
           </form>
         </div>
@@ -197,4 +193,4 @@ function UpdateStudent(props) {
   );
 }
 
-export default UpdateStudent;
+export default AddStudent;

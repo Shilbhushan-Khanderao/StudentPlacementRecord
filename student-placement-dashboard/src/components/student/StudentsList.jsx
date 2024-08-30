@@ -1,34 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getAllStudents, removeStudent } from "../../services/Adminservices";
 import { MdOutlineUpdate, MdDeleteForever, MdCheck } from "react-icons/md";
-import AddStudent from "./AddStudent";
-import UpdateStudent from "./UpdateStudent";
-import AddPlacedStudent from "../placed/AddPlacedStudent";
 
 function StudentsList() {
   const [students, setStudents] = useState([]);
-  const [showAdd, setShowAdd] = useState(false);
-  const [showUpdate, setShowUpdate] = useState(false);
-  const [showPlaced, setShowPlaced] = useState(false);
-  const [sid, setSid] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
+    fetchStudents();
+  }, []);
+
+  const fetchStudents = () => {
     getAllStudents()
       .then((response) => {
         setStudents(response.data);
-        // console.log(response);
       })
       .catch((error) => console.log(error));
-  }, []);
-
-  const handleShowAdd = () => {
-    setShowAdd(true);
   };
 
-  const handleShowUpdate = (studentId) => {
-    setShowUpdate(true);
-    setSid(studentId);
+  const handlePlaced = (studentId) => {
+    if (studentId !== null && studentId !== undefined)
+      navigate("/add-placedstudent", { state: { id: studentId } });
+  };
+
+  const handleUpdate = (studentId) => {
+    if (studentId !== null && studentId !== undefined)
+      navigate("/update-student", { state: { id: studentId } });
   };
 
   const handleDelete = (studentId) => {
@@ -39,38 +37,18 @@ function StudentsList() {
       .catch((error) => console.log(error));
   };
 
-  const handlePlaced = (studentId) => {
-    setShowPlaced(true);
-    setSid(studentId);
-  };
   return (
     <>
       <h1 className="text-center text-3xl">All Students List</h1>
       {students.length ? (
         <div className="w-full">
-          {showUpdate && (
-            <UpdateStudent
-              show={showUpdate}
-              setShow={setShowUpdate}
-              sid={sid}
-            />
-          )}
-          {showAdd && <AddStudent show={showAdd} setShow={setShowAdd} />}
-          {showPlaced && (
-            <AddPlacedStudent
-              show={showPlaced}
-              setShow={setShowPlaced}
-              sid={sid}
-            />
-          )}
-
           <div>
-            <button
-              className="btn btn-outline w-28 mt-2"
-              onClick={handleShowAdd}
+            <Link
+              to="/add-student"
+              className="btn btn-primary btn-outline mx-1"
             >
-              Add
-            </button>
+              Add Student
+            </Link>
             <Link to="/placed-students" className="btn btn-primary mx-1">
               Placed Students
             </Link>
@@ -93,8 +71,8 @@ function StudentsList() {
                   <td>{student.prn}</td>
                   <td>{student.name}</td>
                   <td>{student.teamNumber}</td>
-                  <td>{student.faculty}</td>
-                  <td>{student.mentor}</td>
+                  <td>{student.faculty.name}</td>
+                  <td>{student.mentor.name}</td>
                   <td>{student.centre}</td>
                   <td>
                     <button
@@ -105,12 +83,13 @@ function StudentsList() {
                       <MdCheck />
                     </button>
                     <button
-                      className="btn btn-outline mx-0.5"
-                      type="button"
-                      onClick={() => handleShowUpdate(student.id)}
+                      to="/update-student"
+                      className="btn btn-outline mx-1"
+                      onClick={() => handleUpdate(student.id)}
                     >
                       <MdOutlineUpdate />
                     </button>
+
                     <button
                       className="btn btn-outline mx-0.5"
                       type="button"

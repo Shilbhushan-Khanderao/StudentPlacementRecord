@@ -6,7 +6,6 @@ import {
 } from "../../services/Adminservices";
 import UpdatePlacedStudent from "./UpdatePlacedStudent";
 import { Link, NavLink } from "react-router-dom";
-import { Button } from "react-daisyui";
 
 function PlacedStudentsList() {
   const [students, setStudents] = useState([]);
@@ -69,10 +68,10 @@ function PlacedStudentsList() {
                   <td>{student.prn}</td>
                   <td>{student.name}</td>
                   <td>{student.teamNumber}</td>
-                  <td>{student.faculty}</td>
-                  <td>{student.mentor}</td>
+                  <td>{student.faculty.name}</td>
+                  <td>{student.mentor.name}</td>
                   <td>{student.centre}</td>
-                  <td>{student.company}</td>
+                  <td>{student.company.name}</td>
                   <td>{student.posterCreated === true ? "Yes" : "No"}</td>
                   <td>
                     <button

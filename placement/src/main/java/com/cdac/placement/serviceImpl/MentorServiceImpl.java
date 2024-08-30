@@ -4,10 +4,11 @@ import com.cdac.placement.model.Mentor;
 import com.cdac.placement.repository.MentorRepository;
 import com.cdac.placement.service.MentorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class MentorServiceImpl implements MentorService {
     @Autowired
     private MentorRepository mentorRepository;

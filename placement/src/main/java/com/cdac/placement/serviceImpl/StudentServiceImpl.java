@@ -1,6 +1,13 @@
 package com.cdac.placement.serviceImpl;
 
+import com.cdac.placement.helper.StudentHelper;
+import com.cdac.placement.model.Batch;
+import com.cdac.placement.model.Faculty;
+import com.cdac.placement.model.Mentor;
 import com.cdac.placement.model.Student;
+import com.cdac.placement.repository.BatchRepository;
+import com.cdac.placement.repository.FacultyRepository;
+import com.cdac.placement.repository.MentorRepository;
 import com.cdac.placement.repository.StudentRepository;
 import com.cdac.placement.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +21,12 @@ public class StudentServiceImpl implements StudentService {
 
     @Autowired
     private StudentRepository studentRepository;
+    @Autowired
+    private BatchRepository batchRepository;
+    @Autowired
+    private MentorRepository mentorRepository;
+    @Autowired
+    private FacultyRepository facultyRepository;
 
     @Override
     public List<Student> getAllStudents() {
@@ -29,7 +42,6 @@ public class StudentServiceImpl implements StudentService {
             return null;
         }
     }
-
     @Override
     public boolean deleteAllStudents() {
         try {
@@ -43,9 +55,15 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public boolean addStudent(Student student) {
         try {
-            Optional<Student> opt = studentRepository.findById(student.getId());
-            if (opt.isPresent())
+            Optional<Student> optionalStudent = studentRepository.findById(student.getId());
+            Mentor mentor = StudentHelper.getOrCreateMentorForStudent(student.getMentor(), mentorRepository);
+            Faculty faculty = StudentHelper.getOrCreateFacultyForStudent(student.getFaculty(), facultyRepository);
+            Batch batch = StudentHelper.getOrCreateBatchForStudent(student.getBatch(), batchRepository);
+            if (optionalStudent.isPresent())
                 return false;
+            student.setBatch(batch);
+            student.setMentor(mentor);
+            student.setFaculty(faculty);
             studentRepository.save(student);
             return true;
         } catch (Exception e) {

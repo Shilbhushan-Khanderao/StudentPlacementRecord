@@ -65,14 +65,14 @@ public class CsvHelper {
         students.forEach(student -> student.setBatch(batch));
     }
 
-    private static Mentor getOrCreateMentor(String mentorName, MentorRepository mentorRepository) {
+    public static Mentor getOrCreateMentor(String mentorName, MentorRepository mentorRepository) {
         Mentor mentor = mentorRepository.findByName(mentorName);
         if(mentor == null)
             return mentorRepository.save(new Mentor(mentorName));
         return mentor;
     }
 
-    private static Faculty getOrCreateFaculty(String facultyName, FacultyRepository facultyRepository) {
+    public static Faculty getOrCreateFaculty(String facultyName, FacultyRepository facultyRepository) {
         Faculty faculty = facultyRepository.findByName(facultyName);
         if (faculty == null)
             return facultyRepository.save(new Faculty(facultyName));

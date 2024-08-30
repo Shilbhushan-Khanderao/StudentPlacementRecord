@@ -4,10 +4,11 @@ import com.cdac.placement.model.Faculty;
 import com.cdac.placement.repository.FacultyRepository;
 import com.cdac.placement.service.FacultyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class FacultyServiceImpl implements FacultyService {
     @Autowired
     FacultyRepository facultyRepository;
