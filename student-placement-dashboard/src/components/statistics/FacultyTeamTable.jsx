@@ -1,6 +1,20 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import { getAllStudents } from "../../services/Adminservices";
 function FacultyTeamTable() {
+  const [students, setStudents] = useState();
+
+  useEffect(() => {
+    fetchAllStudents();
+  }, []);
+
+  const fetchAllStudents = () => {
+    getAllStudents()
+      .then((response) => {
+        setStudents(response.data);
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <div className="overflow-x-auto">
       <table className="table w-1/2">
@@ -13,12 +27,12 @@ function FacultyTeamTable() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th>{}</th>
-            <td>{}</td>
-            <td>{}</td>
-            <td>{}</td>
-          </tr>
+          {students.map((student) => (
+            <tr key={student.id}>
+              <td>{student.faculty.name}</td>
+              <td>{student.faculty.name}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

@@ -1,19 +1,19 @@
 import axios from "axios";
 
 //All Students API Endpoints
-export const IMPORTCSVURI = "http://localhost:8080/admin/upload";
-export const GETALLSTUDENTS = "http://localhost:8080/students";
-export const GETSTUDENTBYID = "http://localhost:8080/getStudent/";
-export const ADDSTUDENT = "http://localhost:8080/addStudent";
-export const UPDATESTUDENT = "http://localhost:8080/updateStudent";
-export const REMOVESTUDENT = "http://localhost:8080/deleteStudent?studentid=";
+const IMPORTCSVURI = "http://localhost:8080/admin/upload";
+const GETALLSTUDENTS = "http://localhost:8080/students";
+const GETSTUDENTBYID = "http://localhost:8080/getStudent/";
+const ADDSTUDENT = "http://localhost:8080/addStudent";
+const UPDATESTUDENT = "http://localhost:8080/updateStudent";
+const REMOVESTUDENT = "http://localhost:8080/deleteStudent?studentid=";
 
 //Placed Students API Endpoints
-export const GETALLPLACEDSTUDENTS = "http://localhost:8080/placedStudents";
-export const GETPLACEDSTUDENTBYID = "http://localhost:8080/getPlacedStudent/";
-export const ADDPLACEDSTUDENT = "http://localhost:8080/addPlacedStudent";
-export const UPDATEPLACEDSTUDENT = "http://localhost:8080/updatePlacedStudent";
-export const REMOVEPLACEDSTUDENT =
+const GETALLPLACEDSTUDENTS = "http://localhost:8080/placedStudents";
+const GETPLACEDSTUDENTBYID = "http://localhost:8080/getPlacedStudent/";
+const ADDPLACEDSTUDENT = "http://localhost:8080/addPlacedStudent";
+const UPDATEPLACEDSTUDENT = "http://localhost:8080/updatePlacedStudent";
+const REMOVEPLACEDSTUDENT =
   "http://localhost:8080/deletePlacedStudent?studentid=";
 
 //import data via csv to database
@@ -67,5 +67,3 @@ export function removePlacedStudent(studentId) {
   return axios.delete(REMOVEPLACEDSTUDENT + studentId);
 }
 //CRUD Methods end here....
-
-
