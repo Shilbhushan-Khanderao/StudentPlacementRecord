@@ -8,6 +8,5 @@ import java.util.List;
 
 @Repository
 public interface PlacedStudentRepository  extends JpaRepository<PlacedStudent, Integer> {
-    List<PlacedStudent> getPlacedStudentsGroupByFaculty();
 
 }
