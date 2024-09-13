@@ -18,7 +18,7 @@ public class CompanyServiceImpl implements CompanyService {
         return companyRepository.findAll();
     }
     @Override
-    public Company getCompany(int companyId) {
+    public Company getCompany(Long companyId) {
         try {
             Optional<Company> opt = companyRepository.findById(companyId);
             return opt.orElse(null);
@@ -70,7 +70,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public boolean deleteCompany(Integer companyId) {
+    public boolean deleteCompany(Long companyId) {
         try {
             Optional<Company> opt = companyRepository.findById(companyId);
             if (opt.isPresent()){

@@ -15,6 +15,7 @@ function StudentsList() {
     getAllStudents()
       .then((response) => {
         setStudents(response.data);
+        console.log(response.data);
       })
       .catch((error) => console.log(error));
   };

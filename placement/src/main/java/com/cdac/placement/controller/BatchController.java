@@ -13,12 +13,13 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin("https://localhost:5173")
+@CrossOrigin("http://localhost:5173")
 public class BatchController {
     @Autowired
     private BatchService batchService;
 
     //http://localhost:8080/batches
+    @GetMapping(value = "/batches")
     public ResponseEntity<List<Batch>> getAllBatches(){
         try {
             List<Batch> batches = batchService.getAllBatches();
@@ -32,7 +33,7 @@ public class BatchController {
 
     //http://localhost:8080/getBatch/1
     @GetMapping(value = "/getBatch/{batchid}")
-    public ResponseEntity<?> getBatch(@PathVariable("batchid") int batchid){
+    public ResponseEntity<?> getBatch(@PathVariable("batchid") Long batchid){
         try {
             Batch batch = batchService.getBatch(batchid);
 
@@ -61,7 +62,7 @@ public class BatchController {
     }
     //http://localhost:8080/deleteBatch?batchid=1
     @DeleteMapping(value = "/deleteBatch")
-    public ResponseEntity<Map<String,String>> deleteBatch(@RequestParam("batchid") Integer id){
+    public ResponseEntity<Map<String,String>> deleteBatch(@RequestParam("batchid") Long id){
         HashMap<String, String> hmap = new HashMap<>();
 
         if(batchService.deleteBatch(id))

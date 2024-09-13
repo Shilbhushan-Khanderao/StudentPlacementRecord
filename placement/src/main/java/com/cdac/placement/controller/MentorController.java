@@ -33,7 +33,7 @@ public class MentorController {
 
     //http://localhost:8080/getMentor/1
     @GetMapping(value = "/getMentor/{mentorid}")
-    public ResponseEntity<?> getMentor(@PathVariable("mentorid") int mentorid){
+    public ResponseEntity<?> getMentor(@PathVariable("mentorid") Long mentorid){
         try {
             Mentor mentor = mentorService.getMentor(mentorid);
 
@@ -61,7 +61,7 @@ public class MentorController {
     }
     //http://localhost:8080/deleteMentor?mentorid=1
     @DeleteMapping(value = "/deleteMentor")
-    public ResponseEntity<Map<String,String>> deleteMentor(@RequestParam("mentorid") Integer id){
+    public ResponseEntity<Map<String,String>> deleteMentor(@RequestParam("mentorid") Long id){
         HashMap<String, String> hmap = new HashMap<>();
 
         if(mentorService.deleteMentor(id))

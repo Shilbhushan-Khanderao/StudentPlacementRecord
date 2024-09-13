@@ -40,7 +40,7 @@ public class CsvHelper {
                     Student student = new Student(
                             Long.parseLong(csvRecord.get("PRN")),
                             csvRecord.get("Name"),
-                            Integer.parseInt(csvRecord.get("Team No.")),
+                            Long.parseLong(csvRecord.get("Team No.")),
                             csvRecord.get("Centre")
                     );
 

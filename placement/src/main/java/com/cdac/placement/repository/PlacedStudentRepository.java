@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PlacedStudentRepository  extends JpaRepository<PlacedStudent, Integer> {
+public interface PlacedStudentRepository  extends JpaRepository<PlacedStudent, Long> {
 
 }

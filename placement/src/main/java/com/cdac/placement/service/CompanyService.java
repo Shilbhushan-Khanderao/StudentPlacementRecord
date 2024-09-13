@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface CompanyService {
 
-    public Company getCompany(int companyId);
+    public Company getCompany(Long companyId);
     public List<Company> getAllCompanies();
     public boolean deleteAllCompanies();
     public boolean addCompany(Company company);
     public boolean updateCompany(Company company);
-    public boolean deleteCompany(Integer companyId);
+    public boolean deleteCompany(Long companyId);
 }

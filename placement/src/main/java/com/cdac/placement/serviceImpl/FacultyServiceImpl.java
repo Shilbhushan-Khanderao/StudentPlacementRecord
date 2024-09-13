@@ -18,7 +18,7 @@ public class FacultyServiceImpl implements FacultyService {
         return facultyRepository.findAll();
     }
     @Override
-    public Faculty getFaculty(int facultyId) {
+    public Faculty getFaculty(Long facultyId) {
         try {
             Optional<Faculty> opt = facultyRepository.findById(facultyId);
             return opt.orElse(null);
@@ -72,7 +72,7 @@ public class FacultyServiceImpl implements FacultyService {
     }
 
     @Override
-    public boolean deleteFaculty(Integer facultyId) {
+    public boolean deleteFaculty(Long facultyId) {
         try {
             Optional<Faculty> opt = facultyRepository.findById(facultyId);
             if (opt.isPresent()){

@@ -28,6 +28,13 @@ const ADDMENTOR = "http://localhost:8080/addMentor";
 const UPDATEMENTOR = "http://localhost:8080/updateMentor";
 const DELETEMENTOR = "http://localhost:8080/deleteMentor?mentorid=";
 
+//Placement Stats endpoints
+const GETFACULTIESPLACEMENTSTATSBYBATCH = "http://localhost:8080/placement-stats/faculties/"
+const GETFACULTIESPLACEMENTSTATS = "http://localhost:8080/placement-stats/faculties/all"
+
+const GETOVERALLPLACEMENTSTATSBYBATCH = "http://localhost:8080/placement-stats/overall-analysis/"
+const GETOVERALLPLACEMENTSTATS = "http://localhost:8080/placement-stats/overall-analysis"
+
 //Batch functions
 export function getAllBatches() {
   return axios.get(GETALLBATCHES);
@@ -112,3 +119,20 @@ export function deleteMentor(mentorId) {
   return axios.delete(DELETEMENTOR + mentorId);
 }
 //All required endpoints ends here...
+
+//Placement Stats functions
+export function getFacultiesPlacementStatsByBatch(batchId){
+  return axios.get(GETFACULTIESPLACEMENTSTATSBYBATCH + batchId);
+}
+
+export function getFacultiesPlacementStats(){
+  return axios.get(GETFACULTIESPLACEMENTSTATS);
+}
+
+export function getOverallPlacementStatsByBatch(batchId){
+  return axios.get(GETOVERALLPLACEMENTSTATSBYBATCH + batchId);
+}
+
+export function getOverallPlacementStats(){
+  return axios.get(GETOVERALLPLACEMENTSTATS);
+}

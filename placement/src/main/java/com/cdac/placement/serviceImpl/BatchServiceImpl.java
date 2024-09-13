@@ -19,7 +19,7 @@ public class BatchServiceImpl implements BatchService {
         return batchRepository.findAll();
     }
     @Override
-    public Batch getBatch(int batchId) {
+    public Batch getBatch(Long batchId) {
         try{
             Optional<Batch> opt = batchRepository.findById(batchId);
             return opt.orElse(null);
@@ -71,7 +71,7 @@ public class BatchServiceImpl implements BatchService {
     }
 
     @Override
-    public boolean deleteBatch(Integer batchId) {
+    public boolean deleteBatch(Long batchId) {
         try {
             Optional<Batch> opt = batchRepository.findById(batchId);
             if (opt.isPresent()){

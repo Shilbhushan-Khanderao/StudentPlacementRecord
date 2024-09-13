@@ -32,7 +32,7 @@ public class CompanyController {
 
     //http://localhost:8080/getCompany/1
     @GetMapping(value = "/getCompany/{companyid}")
-    public ResponseEntity<?> getCompany(@PathVariable("companyid") int companyid){
+    public ResponseEntity<?> getCompany(@PathVariable("companyid") Long companyid){
         try {
             Company company = companyService.getCompany(companyid);
 
@@ -60,7 +60,7 @@ public class CompanyController {
     }
     //http://localhost:8080/deleteCompany?companyid=1
     @DeleteMapping(value = "/deleteCompany")
-    public ResponseEntity<Map<String,String>> deleteCompany(@RequestParam("companyid") Integer id){
+    public ResponseEntity<Map<String,String>> deleteCompany(@RequestParam("companyid") Long id){
         HashMap<String, String> hmap = new HashMap<>();
 
         if(companyService.deleteCompany(id))

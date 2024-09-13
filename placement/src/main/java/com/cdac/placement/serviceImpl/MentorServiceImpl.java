@@ -18,7 +18,7 @@ public class MentorServiceImpl implements MentorService {
         return mentorRepository.findAll();
     }
     @Override
-    public Mentor getMentor(int mentorId) {
+    public Mentor getMentor(Long mentorId) {
         try {
             Optional<Mentor> opt = mentorRepository.findById(mentorId);
             return opt.orElse(null);
@@ -70,7 +70,7 @@ public class MentorServiceImpl implements MentorService {
     }
 
     @Override
-    public boolean deleteMentor(Integer mentorId) {
+    public boolean deleteMentor(Long mentorId) {
         try {
             Optional<Mentor> opt = mentorRepository.findById(mentorId);
             if (opt.isPresent()){

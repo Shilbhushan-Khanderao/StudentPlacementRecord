@@ -13,7 +13,7 @@ public class PlacedStudent {
     @Id
     @GeneratedValue
     @Column(name = "id")
-    private  int id;
+    private Long id;
 
     @Column(name = "prn", unique = true)
     private long prn;
@@ -22,7 +22,7 @@ public class PlacedStudent {
     private String name;
 
     @Column(name = "teamNumber")
-    private int teamNumber;
+    private Long teamNumber;
 
     @Column(name = "centre")
     private String centre;

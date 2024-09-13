@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface BatchService {
 
-    public Batch getBatch(int batchId);
+    public Batch getBatch(Long batchId);
     public List<Batch> getAllBatches();
     public boolean deleteAllBatches();
     public boolean addBatch(Batch batch);
     public boolean updateBatch(Batch batch);
-    public boolean deleteBatch(Integer batchId);
+    public boolean deleteBatch(Long batchId);
 }

@@ -33,7 +33,7 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.findAll();
     }
     @Override
-    public Student getStudent(int studentId) {
+    public Student getStudent(Long studentId) {
         try {
             Optional<Student> opt = studentRepository.findById(studentId);
             return opt.orElse(null);
@@ -89,7 +89,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public boolean deleteStudent(Integer studentId) {
+    public boolean deleteStudent(Long studentId) {
         try {
             Optional<Student> opt = studentRepository.findById(studentId);
             if (opt.isPresent()){

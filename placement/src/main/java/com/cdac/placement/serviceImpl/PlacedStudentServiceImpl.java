@@ -1,6 +1,9 @@
 package com.cdac.placement.serviceImpl;
 
+import com.cdac.placement.helper.PlacedStudentHelper;
+import com.cdac.placement.model.Company;
 import com.cdac.placement.model.PlacedStudent;
+import com.cdac.placement.repository.CompanyRepository;
 import com.cdac.placement.repository.PlacedStudentRepository;
 import com.cdac.placement.service.PlacedStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +17,17 @@ public class PlacedStudentServiceImpl implements PlacedStudentService{
 
     @Autowired
     private PlacedStudentRepository placedStudentRepository;
+
+    @Autowired
+    private CompanyRepository companyRepository;
+
     @Override
     public List<PlacedStudent> getAllPlacedStudents() {
         return placedStudentRepository.findAll() ;
     }
 
     @Override
-    public PlacedStudent getPlacedStudent(int studentId) {
+    public PlacedStudent getPlacedStudent(Long studentId) {
         try {
             Optional<PlacedStudent> opt = placedStudentRepository.findById(studentId);
             return opt.orElse(null);
@@ -36,8 +43,11 @@ public class PlacedStudentServiceImpl implements PlacedStudentService{
             Optional<PlacedStudent> opt = placedStudentRepository.findById(placedStudent.getId());
             if (opt.isPresent())
                 return false;
-            placedStudentRepository.save(placedStudent);
-            return true;
+            else{
+                placedStudent.setCompany(PlacedStudentHelper.getOrCreateCompanyForPlacedStudent(placedStudent.getCompany(), companyRepository));
+                placedStudentRepository.save(placedStudent);
+                return true;
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -60,7 +70,7 @@ public class PlacedStudentServiceImpl implements PlacedStudentService{
     }
 
     @Override
-    public boolean deletePlacedStudent(Integer id) {
+    public boolean deletePlacedStudent(Long id) {
         try {
             Optional<PlacedStudent> opt = placedStudentRepository.findById(id);
             if (opt.isPresent()){

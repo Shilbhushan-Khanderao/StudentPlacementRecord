@@ -9,9 +9,9 @@ import java.util.List;
 public interface PlacedStudentService {
 
     List<PlacedStudent> getAllPlacedStudents();
-    PlacedStudent getPlacedStudent(int studentId);
+    PlacedStudent getPlacedStudent(Long studentId);
     boolean addPlacedStudent(PlacedStudent student);
     boolean updatePlacedStudent(PlacedStudent student);
-    boolean deletePlacedStudent(Integer id);
+    boolean deletePlacedStudent(Long id);
 
 }

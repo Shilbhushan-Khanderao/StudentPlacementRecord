@@ -33,7 +33,7 @@ public class FacultyController {
 
     //http://localhost:8080/getFaculty/1
     @GetMapping(value = "/getFaculty/{facultyid}")
-    public ResponseEntity<?> getFaculty(@PathVariable("facultyid") int facultyid){
+    public ResponseEntity<?> getFaculty(@PathVariable("facultyid") Long facultyid){
         try {
             Faculty faculty = facultyService.getFaculty(facultyid);
 
@@ -61,7 +61,7 @@ public class FacultyController {
     }
     //http://localhost:8080/deleteFaculty?facultyid=1
     @DeleteMapping(value = "/deleteFaculty")
-    public ResponseEntity<Map<String,String>> deleteFaculty(@RequestParam("facultyid") Integer id){
+    public ResponseEntity<Map<String,String>> deleteFaculty(@RequestParam("facultyid") Long id){
         HashMap<String, String> hmap = new HashMap<>();
 
         if(facultyService.deleteFaculty(id))

@@ -12,7 +12,7 @@ public class Student {
     @Id
     @GeneratedValue
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @Column(name = "prn", unique = true)
     private long prn;
@@ -21,7 +21,7 @@ public class Student {
     private String name;
 
     @Column(name = "teamNumber")
-    private int teamNumber;
+    private Long teamNumber;
 
     @Column(name = "centre")
     private String centre;
@@ -38,7 +38,7 @@ public class Student {
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
 
-    public Student(long prn, String name, int teamNumber, String centre) {
+    public Student(long prn, String name, Long teamNumber, String centre) {
         this.prn = prn;
         this.name = name;
         this.teamNumber = teamNumber;
