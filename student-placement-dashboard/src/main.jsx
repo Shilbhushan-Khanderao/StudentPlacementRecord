@@ -11,8 +11,8 @@ import AddStudent from "./components/student/AddStudent.jsx";
 import UpdateStudent from "./components/student/UpdateStudent.jsx";
 import UpdatePlacedStudent from "./components/placed_student/UpdatePlacedStudent.jsx";
 import AddPlacedStudent from "./components/placed_student/AddPlacedStudent.jsx";
-import Dashboard from "./components/statistics/Dashboard.jsx";
-
+import FacultyDashboard from "./components/statistics/faculties/FacultyDashboard.jsx";
+import MentorDashboard from "./components/statistics/mentors/MentorDashboard.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -51,8 +51,12 @@ const router = createBrowserRouter([
         element: <UpdatePlacedStudent />,
       },
       {
-        path: "/dashboard",
-        element: <Dashboard />,
+        path: "/faculty-dashboard",
+        element: <FacultyDashboard />,
+      },
+      {
+        path: "/mentor-dashboard",
+        element: <MentorDashboard />,
       },
     ],
   },

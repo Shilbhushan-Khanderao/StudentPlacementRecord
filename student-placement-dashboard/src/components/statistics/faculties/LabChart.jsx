@@ -16,7 +16,7 @@ import {
 function LabChart({ placementStats }) {
   const data = placementStats;
   return (
-    <div className="h-96 w-full">
+    <div className="w-full" style={{ height: "500px" }}>
       {data.length > 0 ? (
         <ResponsiveContainer width="100%" height="100%">
           <BarChart

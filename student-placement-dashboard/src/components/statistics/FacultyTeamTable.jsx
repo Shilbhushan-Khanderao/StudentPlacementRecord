@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getAllStudents } from "../../services/Adminservices";
+function FacultyTeamTable() {
+  const [students, setStudents] = useState();
 
-function FacultyTeamTable({ placementStats }) {
+  useEffect(() => {
+    fetchAllStudents();
+  }, []);
+
+  const fetchAllStudents = () => {
+    getAllStudents()
+      .then((response) => {
+        setStudents(response.data);
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
-    <div className="overflow-x-auto flex-col">
-      <table className="table table-md">
+    <div className="overflow-x-auto">
+      <table className="table w-1/2">
         <thead>
           <tr>
             <th className="text-xl">Faculty</th>
@@ -13,18 +27,10 @@ function FacultyTeamTable({ placementStats }) {
           </tr>
         </thead>
         <tbody>
-          {placementStats.map((placementStat) => (
-            <tr key={placementStat.name}>
-              <td className="text-lg">{placementStat.name}</td>
-              <td className="text-center text-lg">
-                {placementStat.placedStudents}
-              </td>
-              <td className="text-center text-lg">
-                {placementStat.totalStudents}
-              </td>
-              <td className="text-center text-lg">
-                {placementStat.percentagePlaced}
-              </td>
+          {students.map((student) => (
+            <tr key={student.id}>
+              <td>{student.faculty.name}</td>
+              <td>{student.faculty.name}</td>
             </tr>
           ))}
         </tbody>

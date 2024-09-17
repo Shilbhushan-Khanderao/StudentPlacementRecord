@@ -15,6 +15,12 @@ function Home() {
         <div className="text-xl btn btn-primary mx-2">
           <NavLink to="/placed-students">Placed Students</NavLink>
         </div>
+        <div className="text-xl btn btn-primary mx-2">
+          <NavLink to="/faculty-dashboard">Faculty Dashboard</NavLink>
+        </div>
+        <div className="text-xl btn btn-primary mx-2">
+          <NavLink to="/mentor-dashboard">Mentor Dashboard</NavLink>
+        </div>
       </div>
     </>
   );
