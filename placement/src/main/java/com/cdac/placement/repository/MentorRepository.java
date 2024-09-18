@@ -1,19 +1,13 @@
 package com.cdac.placement.repository;
 
 import com.cdac.placement.dto.PlacementStatsDTO;
-import com.cdac.placement.dto.PlacementStatsDTO;
 import com.cdac.placement.model.Mentor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
-import java.util.List;
-
-public interface MentorRepository extends JpaRepository<Mentor, Long> {
 public interface MentorRepository extends JpaRepository<Mentor, Long> {
     Mentor findByName(String name);
 
