@@ -20,15 +20,12 @@ public class Batch {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "batch_name")
-    private String BatchName;
-
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "batch", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Student> studentList;
 
-    public Batch(String name, String batchName) {
+    public Batch(String name) {
         this.name = name;
-        BatchName = batchName;
+
     }
 }

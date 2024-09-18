@@ -26,7 +26,7 @@ public class StudentHelper {
     public static Batch getOrCreateBatchForStudent(Batch batch, BatchRepository batchRepository){
         Batch batch1 = batchRepository.findByName(batch.getName());
         if(batch1 == null)
-            return batchRepository.save(new Batch(batch.getName(), batch.getBatchName()));
+            return batchRepository.save(new Batch(batch.getName()));
         return batch1;
     }
 

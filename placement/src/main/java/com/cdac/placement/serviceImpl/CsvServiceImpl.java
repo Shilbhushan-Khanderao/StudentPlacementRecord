@@ -31,14 +31,14 @@ public class CsvServiceImpl implements CsvService {
     FacultyRepository facultyRepository;
 
     @Override
-    public void save(MultipartFile file, String name, String batchName) {
+    public void save(MultipartFile file, String name) {
         try {
             Batch batch;
-            if(name != null && batchName != null) {
+            if(name != null) {
                 if(batchRepository.existsByName(name))
                     batch = batchRepository.findByName(name);
                 else
-                    batch = batchRepository.save(new Batch(name, batchName));
+                    batch = batchRepository.save(new Batch(name));
             } else {
                 batch = null;
             }

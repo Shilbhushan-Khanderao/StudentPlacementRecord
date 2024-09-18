@@ -4,7 +4,6 @@ import { importData } from "../../services/Adminservices";
 function ImportData() {
   const [file, setFile] = useState();
   const [name, setName] = useState("");
-  const [batchName, setBatchName] = useState("");
 
   function handleChange(event) {
     setFile(event.target.files[0]);
@@ -14,15 +13,10 @@ function ImportData() {
     setName(e.target.value);
   }
 
-  function handleBatchNameChange(e) {
-    setBatchName(e.target.value);
-  }
-
   const importCsvData = (file) => {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("name", name);
-    formData.append("batchName", batchName);
     importData(formData)
       .then((response) => {
         console.log("Data Imported Success...");
@@ -43,14 +37,6 @@ function ImportData() {
             value={name}
             onChange={handleNameChange}
             placeholder="Batch"
-          />
-          <label>Batch Name : </label>
-          <input
-            className="file-input file-input-bordered w-full max-w-xs p-1 m-1"
-            type="text"
-            value={batchName}
-            onChange={handleBatchNameChange}
-            placeholder="BatchName"
           />
           <input
             className="file-input file-input-bordered w-full max-w-xs m-1"
